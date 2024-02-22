@@ -1,5 +1,5 @@
 import { FC, memo } from "react";
-import { Route, Routes, useParams } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { Login } from "../components/pages/Login";
 import { homeRoutes } from "./HomeRoutes";
 
@@ -13,7 +13,7 @@ export const Router: FC = memo(() => {
 
                 <Routes>
                     {homeRoutes.map((route) => (
-                        <Route key={route.path} path={`${"/home"}${route.path}`}  >
+                        <Route key={route.path} path={`${route.path}`}  >
                             {route.children}
                         </Route>
                     ))}
