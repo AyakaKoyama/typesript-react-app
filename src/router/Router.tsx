@@ -4,21 +4,20 @@ import { Login } from "../components/pages/Login";
 import { homeRoutes } from "./HomeRoutes";
 
 export const Router: FC = memo(() => {
-    //elementで{({match:{url}})}を使いたい
+    
     return (
         <Routes>
             <Route path="/" element={<Login />} />
 
-            <Route path="/home" element={
+            <Route path="/home">
+                {homeRoutes.map((route) => (
+                    <Route
+                        key={route.path}
+                        path={route.path}
+                        element={route.children} />
+                ))}
+            </Route>
 
-                <Routes>
-                    {homeRoutes.map((route) => (
-                        <Route key={route.path} path={`${route.path}`}  >
-                            {route.children}
-                        </Route>
-                    ))}
-                </Routes>
-            } />
         </Routes>
     )
 

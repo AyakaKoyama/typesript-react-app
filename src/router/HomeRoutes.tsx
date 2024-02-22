@@ -6,16 +6,16 @@ import { UserManagement } from "../components/pages/UserManagement";
 
 export const homeRoutes = [
     {
-        path: "/",
+        path: "",
         exact: true,
         children: <Home />
 
     }, {
-        path: "/user_management",
+        path: "user_management",
         exact: false,
         children: <UserManagement />
     }, {
-        path: "/setting",
+        path: "setting",
         exact: false,
         children: <Setting />
     }
