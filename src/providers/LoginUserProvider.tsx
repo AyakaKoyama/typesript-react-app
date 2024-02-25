@@ -1,10 +1,11 @@
 import { Dispatch, ReactNode, SetStateAction, createContext, useState } from "react";
 import { User } from "../types/api/user";
-import { Route, Routes } from "react-router-dom";
+
+type LoginUser = User & { isAdmin: boolean }
 
 export type LoginUserContextType = {
-    loginUser: User | null;
-    setLoginUser: Dispatch<SetStateAction<User | null>>
+    loginUser: LoginUser | null;
+    setLoginUser: Dispatch<SetStateAction<LoginUser | null>>
 }
 
 //ログイン情報のステート保持
@@ -14,12 +15,12 @@ export const LoginUserContext = createContext<LoginUserContextType>({} as LoginU
 export const LoginUserProvider = (props: { children: ReactNode }) => {
 
     const { children } = props
-    const [loginUser, setLoginUser] = useState<User | null>(null)
+    const [loginUser, setLoginUser] = useState<LoginUser | null>(null)
     return (
-        <Routes>
-            <LoginUserContext.Provider value={{ loginUser, setLoginUser }}>
-                {children}
-            </LoginUserContext.Provider>
-        </Routes>
+        <LoginUserContext.Provider value={{ loginUser, setLoginUser }}>
+            {children}
+        </LoginUserContext.Provider>
+
+
     )
 }

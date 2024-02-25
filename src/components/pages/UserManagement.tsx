@@ -1,15 +1,16 @@
-import { Center, Spinner, Wrap, WrapItem, useDisclosure } from "@chakra-ui/react";
+import { Center, Spinner, Wrap, WrapItem, useDisclosure, useTabList } from "@chakra-ui/react";
 import { FC, memo, useCallback, useEffect } from "react";
 import { UserCard } from "../organisms/user/userCard";
 import { useAllUsers } from "../../hooks/useAllUser";
 import { UserDatailModal } from "../organisms/user/userDatailModal";
 import { useSelectUser } from "../../hooks/useSelectUser";
+import { useLoginUser } from "../../hooks/useLoginUser";
 
 export const UserManagement: FC = memo(() => {
     const { getUsers, loading, users } = useAllUsers();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { onSelectUser, selectedUser } = useSelectUser();
-
+    const { loginUser } = useLoginUser();
     //画面表示時にユーザー一覧を取得したい
     useEffect(() => getUsers(), [])
 
@@ -42,7 +43,7 @@ export const UserManagement: FC = memo(() => {
 
                 </Wrap>
             )}
-            <UserDatailModal isOpen={isOpen} onClose={onClose} user={selectedUser} />
+            <UserDatailModal isOpen={isOpen} onClose={onClose} user={selectedUser} isAdmin={loginUser?.isAdmin} />
         </>
     )
 })
